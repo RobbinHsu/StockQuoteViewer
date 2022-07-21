@@ -44,17 +44,22 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.StockName,
             this.Price,
             this.Amplitude});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 52);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 53);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(430, 370);
+            this.dataGridView1.Size = new System.Drawing.Size(300, 430);
             this.dataGridView1.TabIndex = 0;
             // 
             // StockName
@@ -64,7 +69,6 @@
             this.StockName.MinimumWidth = 6;
             this.StockName.Name = "StockName";
             this.StockName.ReadOnly = true;
-            this.StockName.Width = 125;
             // 
             // Price
             // 
@@ -73,7 +77,6 @@
             this.Price.MinimumWidth = 6;
             this.Price.Name = "Price";
             this.Price.ReadOnly = true;
-            this.Price.Width = 125;
             // 
             // Amplitude
             // 
@@ -82,7 +85,6 @@
             this.Amplitude.MinimumWidth = 6;
             this.Amplitude.Name = "Amplitude";
             this.Amplitude.ReadOnly = true;
-            this.Amplitude.Width = 125;
             // 
             // stockBindingSource
             // 
@@ -118,7 +120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 441);
+            this.ClientSize = new System.Drawing.Size(300, 483);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
