@@ -99,20 +99,24 @@ namespace StockQuoteViewer
 
             for (int i = rowIndex; i < rowIndex + rowCount; i++)
             {
-                var dataGridViewCell = dataGridView1.Rows[i].Cells[2];
-                if (Convert.ToDecimal(dataGridViewCell.Value.ToString().Replace("%", "")) > 0)
+                var priceCell = dataGridView1.Rows[i].Cells[1];
+                var amplitudeCell = dataGridView1.Rows[i].Cells[2];
+                if (Convert.ToDecimal(amplitudeCell.Value.ToString().Replace("%", "")) > 0)
                 {
-                    dataGridViewCell.Style.ForeColor = Color.Red;
+                    priceCell.Style.ForeColor = Color.Red;
+                    amplitudeCell.Style.ForeColor = Color.Red;
                 }
 
-                if (Convert.ToDecimal(dataGridViewCell.Value.ToString().Replace("%", "")) < 0)
+                if (Convert.ToDecimal(amplitudeCell.Value.ToString().Replace("%", "")) < 0)
                 {
-                    dataGridViewCell.Style.ForeColor = Color.Green;
+                    priceCell.Style.ForeColor = Color.Green;
+                    amplitudeCell.Style.ForeColor = Color.Green;
                 }
 
-                if (Convert.ToDecimal(dataGridViewCell.Value.ToString().Replace("%", "")) == 0)
+                if (Convert.ToDecimal(amplitudeCell.Value.ToString().Replace("%", "")) == 0)
                 {
-                    dataGridViewCell.Style.ForeColor = Color.Black;
+                    priceCell.Style.ForeColor = Color.White;
+                    amplitudeCell.Style.ForeColor = Color.Black;
                 }
             }
         }
