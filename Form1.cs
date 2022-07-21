@@ -89,5 +89,32 @@ namespace StockQuoteViewer
         {
             ReStartView();
         }
+
+        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            var rowIndex = dataGridView1.FirstDisplayedScrollingRowIndex;
+            var columnCount = dataGridView1.Columns.GetColumnCount(DataGridViewElementStates.Displayed);
+            var cellCount = dataGridView1.GetCellCount(DataGridViewElementStates.Displayed);
+            var rowCount = cellCount / columnCount;
+
+            for (int i = rowIndex; i < rowIndex + rowCount; i++)
+            {
+                var dataGridViewCell = dataGridView1.Rows[i].Cells[2];
+                if (Convert.ToDecimal(dataGridViewCell.Value.ToString().Replace("%", "")) > 0)
+                {
+                    dataGridViewCell.Style.ForeColor = Color.Red;
+                }
+
+                if (Convert.ToDecimal(dataGridViewCell.Value.ToString().Replace("%", "")) < 0)
+                {
+                    dataGridViewCell.Style.ForeColor = Color.Green;
+                }
+
+                if (Convert.ToDecimal(dataGridViewCell.Value.ToString().Replace("%", "")) == 0)
+                {
+                    dataGridViewCell.Style.ForeColor = Color.Black;
+                }
+            }
+        }
     }
 }
