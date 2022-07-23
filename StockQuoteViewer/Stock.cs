@@ -1,24 +1,53 @@
-using Microsoft.VisualBasic;
-
 namespace StockQuoteViewer;
 
 public class Stock
 {
     private decimal _limitDown;
-    private decimal _limitUp;
     private Random _random = new();
     private decimal _startPrice;
     public string Name { get; }
     public decimal Price { get; private set; }
     public string Amplitude { get; private set; }
+    public decimal LimitUp { get; set; }
 
     public Stock(string name, decimal startPrice)
     {
         Name = name;
         _startPrice = startPrice;
         Price = startPrice;
+        LimitUp = GetLimitUp(startPrice);
 
         Start();
+    }
+
+    private static decimal GetLimitUp(decimal startPrice)
+    {
+        var result = startPrice;
+        var limitUp = (startPrice * 1.1m);
+
+        result = Recursive(result, limitUp);
+
+        return result;
+    }
+
+    private static decimal Recursive(decimal result, decimal limitUp)
+    {
+        while (true)
+        {
+            if (limitUp > result)
+            {
+                var temp = Tick.TickUp(result);
+                if (limitUp > temp)
+                {
+                    result = temp;
+                    continue;
+                }
+
+                return result;
+            }
+
+            return result;
+        }
     }
 
     private void Start()
@@ -39,7 +68,7 @@ public class Stock
     private decimal TickPrice()
     {
         var next = _random.Next(1, 101);
-        return  next % 2 == 0 ? Tick.TickUp(Price) : Tick.TickDown(Price);
+        return next % 2 == 0 ? Tick.TickUp(Price) : Tick.TickDown(Price);
     }
 
     private string GetAmplitude()

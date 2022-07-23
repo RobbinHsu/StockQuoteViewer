@@ -8,7 +8,9 @@ namespace StockQuoteViewer.Tests
         [Test()]
         public void StockTest()
         {
-            Assert.Fail();
+            var stock = new Stock("0050", 20.60m);
+
+            Assert.AreEqual(22.65m, stock.LimitUp);
         }
     }
 }
