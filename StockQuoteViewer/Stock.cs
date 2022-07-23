@@ -4,22 +4,22 @@ public class Stock
 {
     private decimal _limitDown;
     private Random _random = new();
-    private decimal _startPrice;
+    decimal _startPrice;
     public string Name { get; }
     public decimal Price { get; private set; }
     public string Amplitude { get; private set; }
-    public decimal LimitUp { get; }
-    public decimal LimitDown { get; }
+    internal decimal LimitUp { get; }
+    internal decimal LimitDown { get; }
 
     public Stock(string name, decimal startPrice)
     {
         Name = name;
         _startPrice = startPrice;
         Price = startPrice;
-        LimitUp = GetLimitUp(startPrice);
-        LimitDown = GetLimitDown(startPrice);
+        //LimitUp = GetLimitUp(startPrice);
+        //LimitDown = GetLimitDown(startPrice);
 
-        Start();
+        StartVirtualPrice();
     }
 
     private static decimal GetLimitDown(decimal startPrice)
@@ -82,13 +82,19 @@ public class Stock
         }
     }
 
-    private void Start()
+    private void StartVirtualPrice()
     {
         Task.Run(async delegate
         {
+            var up = Price + Math.Round( Math.Floor(Price * 0.1m),2); 
+            var down = Price - Math.Round(Math.Floor(Price * 0.1m), 2);
             while (true)
             {
-                Price = TickPrice();
+                var temPrice = TickPrice();
+                if (up >= temPrice && temPrice >= down)
+                {
+                    Price = temPrice;
+                }
 
                 Amplitude = GetAmplitude();
 

@@ -16,7 +16,7 @@ public class ViewSource
         var random = new Random();
         for (var i = 0; i < 200; i++)
         {
-            Stocks.Add(new Stock(i.ToString("0000"), Convert.ToDecimal(random.Next(1, 150))));
+            Stocks.Add(new Stock(i.ToString("0000"), Convert.ToDecimal(random.Next(10, 150))));
         }
     }
 }

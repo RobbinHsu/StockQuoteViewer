@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
+using StockQuoteViewer;
 
-namespace StockQuoteViewer.Tests
+namespace StockQuoteViewerTests
 {
     [TestFixture()]
     public class StockTests
