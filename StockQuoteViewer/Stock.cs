@@ -8,7 +8,8 @@ public class Stock
     public string Name { get; }
     public decimal Price { get; private set; }
     public string Amplitude { get; private set; }
-    public decimal LimitUp { get; set; }
+    public decimal LimitUp { get; }
+    public decimal LimitDown { get; }
 
     public Stock(string name, decimal startPrice)
     {
@@ -16,8 +17,39 @@ public class Stock
         _startPrice = startPrice;
         Price = startPrice;
         LimitUp = GetLimitUp(startPrice);
+        LimitDown = GetLimitDown(startPrice);
 
         Start();
+    }
+
+    private static decimal GetLimitDown(decimal startPrice)
+    {
+        var result = startPrice;
+        var limitUp = (startPrice * 0.9m);
+
+        result = RecursiveLimitDown(result, limitUp);
+
+        return result;
+    }
+
+    private static decimal RecursiveLimitDown(decimal result, decimal limitUp)
+    {
+        while (true)
+        {
+            if (limitUp < result)
+            {
+                var temp = Tick.TickDown(result);
+                if (limitUp < temp)
+                {
+                    result = temp;
+                    continue;
+                }
+
+                return result;
+            }
+
+            return result;
+        }
     }
 
     private static decimal GetLimitUp(decimal startPrice)
@@ -25,12 +57,12 @@ public class Stock
         var result = startPrice;
         var limitUp = (startPrice * 1.1m);
 
-        result = Recursive(result, limitUp);
+        result = RecursiveLimitUp(result, limitUp);
 
         return result;
     }
 
-    private static decimal Recursive(decimal result, decimal limitUp)
+    private static decimal RecursiveLimitUp(decimal result, decimal limitUp)
     {
         while (true)
         {

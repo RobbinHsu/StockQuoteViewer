@@ -6,11 +6,19 @@ namespace StockQuoteViewer.Tests
     public class StockTests
     {
         [Test()]
-        public void StockTest()
+        public void LimitUpTest()
         {
             var stock = new Stock("0050", 20.60m);
 
             Assert.AreEqual(22.65m, stock.LimitUp);
+        }
+
+        [Test()]
+        public void LimitDownTest()
+        {
+            var stock = new Stock("0050", 20.60m);
+
+            Assert.AreEqual(18.55m, stock.LimitDown);
         }
     }
 }
