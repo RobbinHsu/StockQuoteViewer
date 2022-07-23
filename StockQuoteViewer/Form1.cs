@@ -97,26 +97,45 @@ namespace StockQuoteViewer
             var cellCount = dataGridView1.GetCellCount(DataGridViewElementStates.Displayed);
             var rowCount = cellCount / columnCount;
 
-            for (int i = rowIndex; i < rowIndex + rowCount; i++)
+            // 只處理視窗顯示範圍內的畫面
+            for (var i = rowIndex; i < rowIndex + rowCount; i++)
             {
                 var priceCell = dataGridView1.Rows[i].Cells[1];
                 var amplitudeCell = dataGridView1.Rows[i].Cells[2];
-                if (Convert.ToDecimal(amplitudeCell.Value.ToString().Replace("%", "")) > 0)
+                var amplitudePrice = Convert.ToDecimal(amplitudeCell.Value.ToString().Replace("%", ""));
+
+                if (amplitudePrice > 0)
                 {
                     priceCell.Style.ForeColor = Color.Red;
                     amplitudeCell.Style.ForeColor = Color.Red;
                 }
 
-                if (Convert.ToDecimal(amplitudeCell.Value.ToString().Replace("%", "")) < 0)
+                if (amplitudePrice < 0)
                 {
                     priceCell.Style.ForeColor = Color.Green;
                     amplitudeCell.Style.ForeColor = Color.Green;
                 }
 
-                if (Convert.ToDecimal(amplitudeCell.Value.ToString().Replace("%", "")) == 0)
+                if (amplitudePrice == 0)
                 {
-                    priceCell.Style.ForeColor = Color.White;
+                    priceCell.Style.ForeColor = Color.Black;
                     amplitudeCell.Style.ForeColor = Color.Black;
+                }
+
+                if (amplitudePrice >= 10m)
+                {
+                    priceCell.Style.BackColor = Color.Red;
+                    priceCell.Style.ForeColor = Color.White;
+                }
+                else if (amplitudePrice <= -10m)
+                {
+                    priceCell.Style.BackColor = Color.Green;
+                    priceCell.Style.ForeColor = Color.White;
+                }
+                else
+                {
+                    priceCell.Style.BackColor = Color.White;
+                    priceCell.Style.ForeColor = Color.Black;
                 }
             }
         }
